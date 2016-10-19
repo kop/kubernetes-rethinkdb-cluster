@@ -71,6 +71,12 @@ else
   fi
 fi
 
+# Support custom initial passwords
+INITIAL_PASSWORD_LINE=""
+if [ -z "${INITIAL_PASSWORD}" ]; then
+    INITIAL_PASSWORD_LINE="--initial-password ${INITIAL_PASSWORD}"
+fi
+
 if [[ -n "${PROXY}" ]]; then
   echo "Starting in proxy mode"
   set -x
@@ -78,6 +84,7 @@ if [[ -n "${PROXY}" ]]; then
     proxy \
     --canonical-address ${POD_IP} \
     --bind all \
+    ${INITIAL_PASSWORD_LINE} \
     ${JOIN_ENDPOINTS} \
     ${@}
 else
@@ -86,6 +93,7 @@ else
     --server-name ${SERVER_NAME} \
     --canonical-address ${POD_IP} \
     --bind all \
+    ${INITIAL_PASSWORD_LINE} \
     ${JOIN_ENDPOINTS} \
     ${@}
 fi
