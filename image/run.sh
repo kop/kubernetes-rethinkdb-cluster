@@ -73,7 +73,7 @@ fi
 
 # Support custom initial passwords
 INITIAL_PASSWORD_LINE=""
-if [ -z "${INITIAL_PASSWORD}" ]; then
+if [ -n "${INITIAL_PASSWORD}" ]; then
     INITIAL_PASSWORD_LINE="--initial-password ${INITIAL_PASSWORD}"
 fi
 
